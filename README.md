@@ -1,6 +1,6 @@
 
 <p align="center">
-  <img src="https://picsum.photos/200](https://i.pinimg.com/736x/f4/e6/fc/f4e6fc7460bb32918839a36f22e99cd2.jpg" width="200" height="165" style="border-radius: 15px;">
+  <img src="https://i.pinimg.com/736x/f4/e6/fc/f4e6fc7460bb32918839a36f22e99cd2.jpg" width="200" height="165" style="border-radius: 15px;">
 </p>
 
 <h3 align="center">Library Management System (Spring Boot REST API)</h3>
