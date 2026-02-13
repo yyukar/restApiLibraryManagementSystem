@@ -1,4 +1,3 @@
-
 <p align="center">
   <img src="https://i.pinimg.com/736x/f4/e6/fc/f4e6fc7460bb32918839a36f22e99cd2.jpg" width="200" height="165" style="border-radius: 15px;">
 </p>
@@ -31,6 +30,7 @@ The project demonstrates **layered architecture**, **DTO validation**, **service
 ## Table of Contents
 
 - [Quick Start](#quick-start)
+- [Docker Quick Start](#docker-quick-start)
 - [Status](#status)
 - [What’s Included](#whats-included)
 - [Technologies Used](#technologies-used)
@@ -44,20 +44,20 @@ The project demonstrates **layered architecture**, **DTO validation**, **service
 ## Quick Start
 
 > This is a Spring Boot REST API using PostgreSQL.  
-> Requires JDK 21+ and Maven 3.9+.
+> Requires **JDK 21+** and **Maven 3.9+**.
 
 ### 1️⃣ Clone the repository
 
 ```bash
 git clone https://github.com/yyukar/library-management-system.git
-cd Library-Management-System
+cd library-management-system
 ```
 
-### 2️⃣ Configure the database
+### 2️⃣ Configure the database (Local)
 
 Create a PostgreSQL database named `library_db`.
 
-Update your `application.properties`:
+Update `src/main/resources/application.properties`:
 
 ```properties
 spring.datasource.url=jdbc:postgresql://localhost:5432/library_db
@@ -75,8 +75,69 @@ spring.application.name=Library-Management-System
 mvn spring-boot:run
 ```
 
-Open **http://localhost:8080/swagger-ui.html**  
+Open **http://localhost:8080/swagger-ui/index.html**  
 You can explore and test all endpoints via the Swagger UI.
+
+---
+
+## Docker Quick Start
+
+> This project includes Docker support with PostgreSQL and automatic schema + seed initialization via `database.sql`.
+
+### ✅ Requirements
+- Docker + Docker Compose
+
+### 1️⃣ Run with Docker Compose
+
+From the project root:
+
+```bash
+docker compose up --build
+```
+
+- API: **http://localhost:8080**
+- Swagger UI: **http://localhost:8080/swagger-ui/index.html**
+- PostgreSQL: **localhost:5432**
+
+### 2️⃣ Database initialization (schema + seed)
+
+On the **first run**, the PostgreSQL container executes:
+
+- `./database.sql` → mounted into `/docker-entrypoint-initdb.d/001_database.sql`
+
+This creates the tables and inserts seed data automatically.
+
+> Note: PostgreSQL init scripts run only when the database volume is created for the first time.
+
+### 3️⃣ Docker profile configuration
+
+The app runs with:
+
+- `SPRING_PROFILES_ACTIVE=docker`
+
+and uses:
+
+- `src/main/resources/application-docker.properties`
+
+Example settings:
+
+```properties
+spring.datasource.url=jdbc:postgresql://db:5432/library
+spring.datasource.username=postgres
+spring.datasource.password=postgres
+spring.jpa.hibernate.ddl-auto=none
+```
+
+### Useful commands
+
+```bash
+# Stop containers
+docker compose down
+
+# Reset DB (re-run database.sql on next start)
+docker compose down -v
+docker compose up --build
+```
 
 ---
 
@@ -97,9 +158,15 @@ You can explore and test all endpoints via the Swagger UI.
 ```
 library-management-system/
 │
+├── Dockerfile
+├── docker-compose.yml
+├── database.sql
+├── .dockerignore
+│
 ├── src/main/java/com/example/library/
 │   ├── LibraryManagementSystemApplication.java
-│   ├── config/                  # ModelMapper & Swagger configuration
+│   ├── config/                  # ModelMapper, Swagger, CORS configuration
+│   │   └── CorsConfig.java
 │   ├── core/                    # Exception handling & API response wrappers
 │   ├── domain/entity/           # JPA entities (Author, Book, Publisher, etc.)
 │   ├── repository/              # JPA repositories
@@ -111,7 +178,8 @@ library-management-system/
 │       └── dto/                 # Request & response DTOs
 │
 ├── src/main/resources/
-│   └─── application.properties  # Database & app configuration
+│   ├── application.properties        # Local configuration (localhost DB)
+│   └── application-docker.properties # Docker profile configuration (db service)
 │
 └── pom.xml                      # Maven dependencies
 ```
@@ -133,6 +201,7 @@ library-management-system/
 | **Hibernate Validator** | Request validation |
 | **Springdoc OpenAPI (Swagger)** | API documentation |
 | **Maven** | Build & dependency management |
+| **Docker & Docker Compose** | Containerized app + database setup |
 
 ---
 
@@ -149,6 +218,7 @@ library-management-system/
 - **Global Exception Handling** with custom messages
 - **Layered Architecture**: Controller → Service → Repository → Entity
 - **Swagger UI** integration for testing and exploration
+- **CORS Configuration** for frontend integration (`CorsConfig`)
 
 ---
 
@@ -195,3 +265,4 @@ Special thanks to the instructors and community contributors who guided this lea
 
 This project is currently unlicensed.  
 You are free to use, modify, and learn from the code.
+
