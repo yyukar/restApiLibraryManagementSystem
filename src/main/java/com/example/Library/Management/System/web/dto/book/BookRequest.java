@@ -21,6 +21,5 @@ public class BookRequest {
     @NotNull
     private Long publisherId;
 
-    @NotNull
     private Set<Long> categoryIds;
 }

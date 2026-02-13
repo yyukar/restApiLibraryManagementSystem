@@ -39,8 +39,9 @@ public class BookBorrowingController {
         return ResponseEntity.ok(ApiResponse.ok(service.update(id, req)));
     }
 
-    @PatchMapping("/{id}/return")
-    public ResponseEntity<ApiResponse<BookBorrowingResponse>> returnBook(@PathVariable Long id) {
-        return ResponseEntity.ok(ApiResponse.ok(service.returnBook(id)));
+    @DeleteMapping("/{id}")
+    public ResponseEntity<ApiResponse<Void>> delete(@PathVariable Long id) {
+        service.delete(id);
+        return ResponseEntity.ok(ApiResponse.okMessage("Kayıt silindi"));
     }
 }

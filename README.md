@@ -27,6 +27,29 @@ The project demonstrates **layered architecture**, **DTO validation**, **service
 
 ---
 
+## Frontend Live Demo
+
+- [Vercel live demo](https://library-management-web-bay.vercel.app) `https://library-management-web-bay.vercel.app`
+
+---
+
+## Frontend Repository
+
+This frontend consumes the REST API exposed by this backend and provides the web UI for the Library Management System:
+
+- **[Frontend Repo](https://github.com/yyukar/library-management-web):** `https://github.com/yyukar/library-management-web`
+
+---
+
+## Demo Video (Local Full Stack)
+
+A short YouTube video showing the app running locally with the backend:
+
+- **[YouTube](https://www.youtube.com/watch?v=okWZtI_pww4):** `https://www.youtube.com/watch?v=okWZtI_pww4`
+
+---
+
+
 ## Table of Contents
 
 - [Quick Start](#quick-start)
@@ -82,10 +105,15 @@ You can explore and test all endpoints via the Swagger UI.
 
 ## Docker Quick Start
 
-> This project includes Docker support with PostgreSQL and automatic schema + seed initialization via `database.sql`.
+> This repository provides a ready-to-run Docker setup for the backend + PostgreSQL. The database schema and seed data are automatically initialized on first run via db/init/database.sql.
+The frontend lives in a separate repository (linked above) and can be run alongside the backend if you include it in the same folder structure (see below).
 
-### ✅ Requirements
+###  Requirements
 - Docker + Docker Compose
+- The project structure must match the repository layout:
+- docker-compose.yml / dockercompose.yaml in the provided Docker Compose directory
+- db/init/database.sql at the root path shown in the project structure
+- backend/ and (optional) frontend/ directories in place so Compose build contexts resolve correctly
 
 ### 1️⃣ Run with Docker Compose
 

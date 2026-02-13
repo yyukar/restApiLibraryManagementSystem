@@ -31,7 +31,7 @@ public class PublisherServiceImpl implements PublisherService {
     public PublisherResponse get(Long id) {
         Publisher p = publisherRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Yayınevi bulunamadı: " + id));
-        return mapper.map(p, PublisherResponse.class); // address DTO'da yok
+        return mapper.map(p, PublisherResponse.class);
     }
 
     @Override
@@ -48,7 +48,7 @@ public class PublisherServiceImpl implements PublisherService {
         p.setName(req.getName());
         p.setEstablishmentYear(req.getEstablishmentYear());
         p.setAddress(req.getAddress());
-        return mapper.map(p, PublisherResponse.class); // address yine dönülmüyor
+        return mapper.map(p, PublisherResponse.class);
     }
 
     @Override

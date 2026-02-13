@@ -16,6 +16,6 @@ public class BookUpdateRequest {
     private Long authorId;
     @NotNull
     private Long publisherId;
-    @NotNull
     private Set<Long> categoryIds;
 }
+

@@ -14,8 +14,7 @@ public class BookBorrowingCreateRequest {
 
     @Email
     @NotBlank
-    private String borrowerEmail; // allowed only here
+    private String borrowerEmail;
 
-    @NotNull
     private LocalDate borrowingDate;
 }

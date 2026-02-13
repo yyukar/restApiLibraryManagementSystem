@@ -11,6 +11,6 @@ public class PublisherRequest {
     @Min(value = 1400, message = "Kuruluş yılı mantıklı bir değer olmalı")
     private Integer establishmentYear;
 
-    @NotBlank(message = "Adres boş olamaz")
+    @Size(min = 2, message = "Adres en az 2 karakter olmalı")
     private String address;
 }

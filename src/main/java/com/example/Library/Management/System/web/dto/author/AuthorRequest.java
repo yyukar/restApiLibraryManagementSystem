@@ -12,6 +12,6 @@ public class AuthorRequest {
     @Past(message = "Doğum tarihi geçmişte olmalı")
     private LocalDate birthDate;
 
-    @NotBlank(message = "Ülke boş olamaz")
+    @Size(min = 2, message = "Ülke en az 2 karakter olmalı")
     private String country;
 }

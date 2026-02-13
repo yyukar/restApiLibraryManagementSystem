@@ -7,4 +7,5 @@ public class PublisherResponse {
     private Long id;
     private String name;
     private Integer establishmentYear;
+    private String address;
 }
